@@ -1,0 +1,22 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int EstMayor (int a, int b, int c) {
+int mayor = a;
+    if (b > mayor) {
+        mayor = b;
+    }
+    if (c > mayor) {
+        mayor = c;
+    }
+    return mayor;
+}
+int main(){
+    ios::sync_with_stdio(0);
+    cin.tie(0); cout.tie(0);
+    int a, b, c;
+     cout << " ingrese tres numeros " << endl;
+    cin >> a >> b >> c;
+    cout << EstMayor(a, b, c) << endl; 
+    return 0;
+}
