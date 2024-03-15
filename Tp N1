@@ -1,0 +1,16 @@
+#include <bits/stdc++.h>
+using namespace std;
+bool EsDivisor (int n) { bool flag = false;
+if (n % 3 == 0) flag = true;
+ return flag;
+}
+int main(){
+    ios::sync_with_stdio(0);
+    cin.tie(0); cout.tie(0);
+    int n; cout << " ingrese un numero " << endl;
+    cin >> n;
+    string msg = " NO ES MULTIPLO ";
+    if (EsDivisor(n)) msg = " ES MULTIPLO ";
+    cout << msg << endl;
+    return 0;
+}
