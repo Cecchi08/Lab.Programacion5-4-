@@ -1,0 +1,40 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+string InvertirTexto(string frase) {
+    int l = 0, r = 0;
+    for (int i = 0; i < frase.size(); i++) {
+        if (frase[i] == '(') {
+            l = i;
+        } else if (frase[i] == ')') {
+            r = i;
+            while (l + 1 < r - 1) {
+                swap(frase[l + 1], frase[r - 1]);
+                l++;
+                r--;
+            }
+        }
+    }
+    return frase;
+}
+
+string ArmarFrase(string frase) {
+    string aux;
+    for (int i = 0; i < frase.size(); i++) {
+        if (i != frase.size() - 1) {
+            if (frase[i] != '(' && frase[i] != ')') {
+                aux.push_back(frase[i]);
+            }
+        }
+    }
+    return aux;
+}
+
+int main() {
+    string frase;
+    getline(cin, frase);
+    frase = InvertirTexto(frase);
+    string respuesta = ArmarFrase(frase);
+    cout << respuesta << endl;
+    return 0;
+}
