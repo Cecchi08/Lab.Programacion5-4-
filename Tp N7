@@ -1,0 +1,76 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+vector<int> CalcularMax(std::string frase) {
+vector<int> solucion;
+    int cant = 0;
+    for (int i = 0; i < frase.size(); i++) {
+        if (frase[i] == 'G')  {
+            cant++;
+        } 
+        if (frase[i] != 'G' || i == frase.size() - 1) {
+            solucion.push_back(cant);
+            cant = 0;
+        }
+    }
+    sort(solucion.begin(), solucion.end());
+    cout << solucion[solucion.size()-1] << std::endl;
+    cout << solucion[solucion.size()-2] << std::endl;
+    return solucion;
+}
+
+int CalcularDistancia(std::string frase, std::vector<int> solucion) {
+    int pos_uno = -1, pos_dos = -1;
+    int cant = 0;
+    for (int i = 0; i < frase.size(); i++) {
+        if (frase[i] == 'G')  {
+            cant++;…
+[16:43, 6/4/2024] Mateo: #include <bits/stdc++.h>
+using namespace std;
+
+vector<int> CalcularMax(std::string frase) {
+vector<int> solucion;
+    int cant = 0;
+    for (int i = 0; i < frase.size(); i++) {
+        if (frase[i] == 'G')  {
+            cant++;
+        } 
+        if (frase[i] != 'G' || i == frase.size() - 1) {
+            solucion.push_back(cant);
+            cant = 0;
+        }
+    }
+    sort(solucion.begin(), solucion.end());
+    cout << solucion[solucion.size()-1] << endl;
+    cout << solucion[solucion.size()-2] << endl;
+    return solucion;
+}
+
+int CalcularDistancia(string frase, vector<int> solucion) {
+    int pos_uno = 0, pos_dos = 0;
+    int cant = 0;
+    for (int i = 0; i < frase.size(); i++) {
+        if (frase[i] == 'G')  {
+            cant++;
+        } 
+        if (frase[i] != 'G' || i == frase.size() - 1) {
+            if (cant == solucion[solucion.size() - 1]) {
+                pos_uno = i - cant;
+            } 
+            if (cant == solucion[solucion.size() - 2]) {
+                pos_dos = i;
+            }
+            cant = 0;
+        }
+    }
+    return pos_uno - pos_dos;
+}
+
+int main(){
+    string frase;
+    getline(std::cin, frase);
+    cout << frase.size() << endl;
+    vector<int> solucion = CalcularMax(frase);
+    cout << CalcularDistancia(frase, solucion) << std::endl;
+    return 0;
+}
