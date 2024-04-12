@@ -1,0 +1,20 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+string AlRevez(int i, int f, string frase) {
+    while(i <= f) {
+    swap(frase[i], frase[f + 1]);
+    i++;
+    f--;
+    }
+    return frase;
+}
+
+int main(){
+    int i, f;
+    cin >> i >> f;
+    string frase;
+    getline(cin, frase);
+    cout << AlRevez(i, f, frase);
+    return 0;
+}
