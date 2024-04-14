@@ -1,0 +1,28 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+vector<int> soluciones;
+vector<int> posiciones;
+
+void Descifra (string frase) {
+    for (int i = 0; i < frase.size() ; i++) {
+        if (frase[i] == '*') {
+            posiciones.push_back(i);
+        }
+    }
+    soluciones.push_back(posiciones[1] - posiciones[0] - 1);
+    soluciones.push_back(posiciones[2] - posiciones[1] - 1);
+    soluciones.push_back(posiciones[3] - posiciones[2] - 1);
+    soluciones.push_back(posiciones[4] - posiciones[3] - 1);
+    for ( int i = 0 ; i < soluciones.size() ; i ++ ) {
+        cout << soluciones[i] << endl;
+    }
+    return;
+}
+int main(){
+    string frase;
+    getline(cin, frase);
+    Descifra(frase);
+    return 0;
+}
