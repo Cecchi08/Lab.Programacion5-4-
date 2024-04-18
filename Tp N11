@@ -1,0 +1,44 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+string l;
+string o;
+vector<vector<string>> Matriz;
+
+
+void buildMatriz (int n, int m) {
+    for (int i = 0; i < n; i++){
+        for (int j = 0; j < m ; j++) {
+            if (i % 2 == 0) {
+                Matriz[i][j] = l;
+            } if (i % 2 != 0) {
+            Matriz[i][j] = o;
+            }
+        }
+    }
+    return;
+}
+
+void mostrarMatriz (int n, int m) {
+    for (int i = 0 ; i < n; i++) {
+    cout << endl;
+        for (int j = 0; j < m; j++){
+         cout << Matriz[i][j];
+         }
+    }
+    return;
+}
+
+int main() {
+    int n, m; 
+    cin >> n >> m;
+    cout << n << " " << m << " ";
+    l = "L";
+    o = "O";
+    Matriz.assign(n, vector<string> (m));
+    buildMatriz(n, m);
+    mostrarMatriz(n, m);
+    
+    return 0;
+}
