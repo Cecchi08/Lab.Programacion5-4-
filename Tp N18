@@ -1,0 +1,92 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+class CNumber {
+    private :
+    int n_uno;
+    int n_dos;
+    int n_tres;
+    
+    public :
+    CNumber(int,int,int);
+    int Max();
+    int Min();
+    float promedio();
+    int cantPares();
+    int cantImpares();
+};
+
+CNumber::CNumber(int _n_uno,int _n_dos,int _n_tres) {
+    n_uno = _n_uno;
+    n_dos = _n_dos;
+    n_tres = _n_tres;
+}
+
+int CNumber::Max() {
+    int auxiliar = 0;
+    auxiliar = max(n_uno, n_dos);
+    auxiliar = max(auxiliar, n_tres);
+    return auxiliar;
+}
+
+int CNumber::Min() {
+    int auxiliar = 0;
+    auxiliar = min(n_uno, n_dos);
+    auxiliar = min(auxiliar, n_tres);
+    return auxiliar;
+}
+
+float CNumber::promedio() {
+    float Promedio = 0;
+    int auxiliar = 0;
+    auxiliar = n_uno + n_dos + n_tres;
+    Promedio = auxiliar / 3;
+    return Promedio;
+}
+
+int CNumber::cantPares() {
+    int cant = 0;
+    if (n_uno % 2 == 0) {
+        cant ++;
+    }
+    if (n_dos % 2 == 0) {
+        cant ++;
+    }
+    if (n_tres% 2 == 0) {
+        cant ++;
+    }
+    return cant;
+} 
+
+int CNumber::cantImpares() {
+    int cant = 0;
+    if (n_uno % 2 != 0) {
+        cant ++;
+    }
+    if (n_dos % 2 != 0) {
+        cant ++;
+    }
+    if (n_tres% 2 != 0) {
+        cant ++;
+    }
+    return cant;
+}
+
+int main(){
+    int n_uno, n_dos, n_tres, maximo, minimo, cant_pares, cant_impares;
+    float Promedio;
+    cin >> n_uno >> n_dos >> n_tres;
+    CNumber numeros = CNumber(n_uno, n_dos, n_tres);
+    maximo = numeros.Max();
+    minimo = numeros.Min();
+    Promedio = numeros.promedio();
+    cant_pares = numeros.cantPares();
+    cant_impares = numeros.cantImpares();
+    cout << maximo << endl;
+    cout << minimo << endl;
+    cout << Promedio << endl;
+    cout << cant_pares << endl;
+    cout << cant_impares << endl;
+    return 0;
+}
