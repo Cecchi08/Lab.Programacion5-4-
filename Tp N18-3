@@ -1,0 +1,59 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+class CEmpleado {
+	private :
+	string nombre;
+	int anioIngreso;
+	int salario;
+	string direccion;
+	public : 
+	CEmpleado(string,int,int,string);
+	int aniosAntiguedad();
+	bool ViveEnWallStreet(); 	 
+};
+
+CEmpleado::CEmpleado (string _nombre,int _anioIngreso,int _salario,string _direccion) {
+	nombre = _nombre;
+	anioIngreso = _anioIngreso;
+	salario = _salario;
+	direccion = _direccion;
+}
+
+int CEmpleado::aniosAntiguedad() {
+	return 2024 - anioIngreso;
+}
+
+bool CEmpleado::ViveEnWallStreet() {
+	string buscar = "Wall Street";
+	bool flag = false;
+	if (direccion.find(buscar)) {
+		flag = true;
+	} 
+	return flag;
+}
+
+int main () {
+	string nombre;
+	getline(cin, nombre);
+	int anioIngreso;
+	cin >> anioIngreso;
+	int salario;
+	cin >> salario;
+	string direccion;
+	getline(cin, direccion);
+	CEmpleado caracteristicas = CEmpleado(nombre, anioIngreso, salario, direccion);
+	int anios;
+	bool ViveWallStreet;
+	anios = caracteristicas.aniosAntiguedad();
+	ViveWallStreet = caracteristicas.ViveEnWallStreet();
+	string respuesta = "NO VIVE EN WALL STREET";
+	if (ViveWallStreet) {
+		respuesta = "VIVE EN WALL STREET";
+	}
+	cout << nombre << " " << anioIngreso << " " << salario << " " << direccion << endl;
+	cout << "cantidad de años activos : " << anios << endl;
+	cout << respuesta << endl;
+	return 0;
+}
