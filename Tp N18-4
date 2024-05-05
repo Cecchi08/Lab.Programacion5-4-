@@ -1,0 +1,57 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+class Empleado {
+  private: 
+  string nombre; 
+  string apellido;
+  string domicilio;
+  int cantHijos;
+  int sueldoBasico;
+  int antiguedad;
+  public:
+  Empleado(string,string,string,int,int,int);
+  float jubilaciones();
+  float obraSociales();
+  float INSSJP();
+};
+
+Empleado::Empleado(string Nombre,string Apellido,string Domicilio,int CantHijos,int SueldoBasico,int Antiguedad)  {
+    nombre = Nombre;
+    apellido = Apellido;
+    domicilio = Domicilio;
+    cantHijos = CantHijos;
+    sueldoBasico = SueldoBasico;
+    antiguedad = Antiguedad;
+}
+
+float Empleado::jubilaciones() {
+    return (11 * sueldoBasico) / 100;
+}
+
+float Empleado::obraSociales() {
+    return (3 * sueldoBasico) / 100;
+}
+
+float Empleado::INSSJP() {
+    return (3 * sueldoBasico) / 100;
+}
+
+int main(){
+    string nombre, apellido, domicilio;
+    getline(cin, nombre);
+    getline(cin, apellido);
+    getline(cin, domicilio);
+    int canthijos, sueldoBasico, antiguedad;
+    cin >> canthijos >> sueldoBasico >> antiguedad;
+    float jubilacion, obraSocial, INSSJP;
+    Empleado deducciones = Empleado(nombre, apellido, domicilio, canthijos, sueldoBasico, antiguedad);
+    jubilacion = deducciones.jubilaciones();
+    obraSocial = deducciones.obraSociales();
+    INSSJP = deducciones.INSSJP();
+    cout << "cantidad de dinero destinada a la jubilacion : " << jubilacion << endl;
+    cout << "cantidad de dinero destinada a las obras sociales : " << obraSocial << endl;
+    cout << "cantidad de dinero destinada al INSSJP : " << INSSJP << endl;
+    return 0;
+}
