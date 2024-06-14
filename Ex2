@@ -1,0 +1,87 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+class CPersona {
+    private:
+    string nombre;
+    int edad;
+    string DNI;
+    char genero;
+    double peso;
+    float altura;
+    public: 
+    CPersona(string _nombre, int _edad, string _DNI, char _genero, double _peso, float _altura);
+    float calcularMC();
+    bool esMayorDeEdad();
+    bool comprobarGenero();
+};
+
+CPersona::CPersona(string _nombre, int _edad, string _DNI, char _genero, double _peso, float _altura) {
+    nombre = _nombre;
+    edad = _edad;
+    DNI = _DNI;
+    genero = _genero;
+    peso = _peso;
+    altura = _altura;
+}
+
+float CPersona::calcularMC() {
+    double resultado = peso / (pow(altura,2));
+    if (resultado < 20) {
+        return -1;
+    } else if (resultado > 20 && resultado < 25) {
+        return 0;
+    } else if (resultado > 25) {
+        return 1;
+    }
+}
+
+bool CPersona::esMayorDeEdad() {
+    bool flag = true;
+    if (edad < 18) {
+        flag = false;
+    }    
+    return false;
+}
+
+bool CPersona::comprobarGenero() {
+    bool flag = true;
+    if (genero != 'H' && genero != 'M') {
+        flag = false;
+    }    
+    return flag;
+}
+
+int main(){
+    string nombre;
+    cin >> nombre;
+    int edad;
+    cin >> edad;
+    string DNI;
+    cin >> DNI;
+    char genero;
+    cin >> genero;
+    double peso;
+    cin >> peso;
+    float altura;
+    cin >> altura;
+    CPersona p1 = CPersona(nombre, edad, DNI, genero, peso, altura);
+    if (p1.calcularMC() == -1) {
+        cout << "Usted esta por debajo del promedio" << endl;
+    } else if (p1.calcularMC() == 0) {
+        cout << "Usted esta dentro del promedio" << endl;
+    } else if (p1.calcularMC() == 1) {
+        cout << "Usted tiene sobrepeso" << endl;
+    } 
+    if (p1.esMayorDeEdad()) {
+        cout << "Usted es mayor de edad" << endl;
+    } else {
+        cout << "Usted es menor de edad" << endl;
+    } if (p1. comprobarGenero()) {
+        cout << "Su genero es correcto" << endl;
+    } else {
+        cout << "Su genero es H" << endl;
+    }
+    return 0;
+}
