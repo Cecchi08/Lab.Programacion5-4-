@@ -1,0 +1,43 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+class alumno {
+    private:
+    string name;
+    int amount_of_weekends_losed;
+    string question;
+    public:
+    alumno(string n, int a, string q) {
+    this -> name = n;
+    this -> amount_of_weekends_losed = a;
+    this -> question = q;
+    }
+    void resolveQuestion () {
+        if (amount_of_weekends_losed < 5 || question == "NO")  cout << "Para "<< name << " la materia no sirve" << endl;
+        else cout << "Para " << name << " la materia si sirve" << endl;
+        return;
+    } 
+};
+
+vector<alumno> arr;
+
+int main () {
+    int cantPersonas; 
+    cout << "Ingrese la cantidad de personas:" << endl;
+    cin >> cantPersonas;
+    string name, question;
+    int amount_of_weekends_losed;
+    for (int i = 0; i < cantPersonas; i++) {
+        cout << "Ingrese su nombre:" << endl;
+        cin >> name;
+        cout << "Ingrese la cantidad de fines de semana perdidos por la materia:" << endl;
+        cin >> amount_of_weekends_losed;
+        cout << "Para usted, sirve la materia, si es si, entonces SI, sino, escriba NO" << endl;
+        cin >> question;
+        alumno Alumno(name, amount_of_weekends_losed, question);
+        arr.push_back(Alumno);
+        Alumno.resolveQuestion();
+    }
+    return 0;   
+}
