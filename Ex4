@@ -1,0 +1,88 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+// Funcion para saber si la contraseña tiene 2 o mas mayusculas 
+bool tieneMayus(int longitud, string password) {
+    int cantMayus = 0;
+    for (int i = 0; i < longitud; i++) {
+        if (password[i] >= 'A' && password[i] <= 'Z')
+            cantMayus++;
+        if (cantMayus >= 2) return true;
+    }
+    return false;
+}
+
+// Funcion para saber si la contraseña tiene por lo menos 2 minusculas
+bool tieneMinus(int longitud, string password) {
+    int cantMinus = 0;
+    for (int i = 0; i < longitud; i++) {
+        if (password[i] >= 'a' && password[i] <= 'z')
+            cantMinus++;
+        if (cantMinus >= 2) return true;
+    }
+    return false;
+}
+
+// Funcion para saber si la contrasena tiene 5 o mas numeros
+bool tiene5Numeros(int longitud, string password) {
+    int cantNumeros = 0;
+    for (int i = 0; i < longitud; i++) {
+        if (password[i] >= '0' && password[i] <= '9')
+            cantNumeros++;
+        if (cantNumeros >= 5) return true;
+    }
+    return false;
+}
+
+// Funcion para generar una nueva contraseña 
+string generarNewPassword(int longitud, string password) {
+    string newPassword(longitud, ' ');
+    for (int i = 0; i < longitud; i++) newPassword[i] = 'A' + (i % 26);
+    return newPassword;
+}
+
+class CPassword {
+    private:
+    int longitud;
+    string password;
+    public:
+    CPassword(int l, string p) {
+        this->longitud = l;
+        this->password = p;
+    }
+    bool esFuerte() {
+        bool flag = false;
+        if (tieneMayus(longitud, password) && tieneMinus(longitud, password) && tiene5Numeros(longitud, password))
+            flag = true;
+        return flag;
+    }
+    void generarPassword() {
+        cout << "Su nueva contraseña es " << generarNewPassword(longitud, password) << endl;
+    }
+};
+
+vector<CPassword> arr;
+
+int main() {
+    int cantContraseñas; 
+    cout << "Ingrese la cantidad de contraseñas" << endl;
+    cin >> cantContraseñas;
+    for (int i = 0; i < cantContraseñas; i++) {
+        int longitud;
+        cout << "Ingrese la longitud de la contraseña" << endl;
+        cin >> longitud;
+        cin.ignore(); 
+        string password;
+        cout << "Ingrese la contraseña" << endl;
+        getline(cin, password);
+        CPassword contraseña(longitud, password);
+        arr.push_back(contraseña);
+        if (contraseña.esFuerte())
+            cout << "Su contraseña es fuerte" << endl;
+        else
+            cout << "Su contraseña es débil" << endl;
+        contraseña.generarPassword();
+    }
+    return 0;
+}
