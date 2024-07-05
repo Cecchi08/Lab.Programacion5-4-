@@ -14,13 +14,13 @@ class CRaices {
         this-> c = C;
     }
     void obtenerRaices() {
-        cout << (-b + sqrt(pow(n, 2) - 4 * a *c)) / 2 * a << endl;
-        cout << (-b - sqrt(pow(n, 2) - 4 * a *c)) / 2 * a << endl;
+        cout << (-b + sqrt(pow(b, 2) - 4 * a *c)) / 2 * a << endl;
+        cout << (-b - sqrt(pow(b, 2) - 4 * a *c)) / 2 * a << endl;
         return; }
     
     void obtenerRaiz() {
-        int firstRoot = (-b + sqrt(pow(n, 2) - 4 * a *c)) / 2 * a;
-        int secondRoot = (-b - sqrt(pow(n, 2) - 4 * a *c)) / 2 * a;
+        int firstRoot = (-b + sqrt(pow(b, 2) - 4 * a *c)) / 2 * a;
+        int secondRoot = (-b - sqrt(pow(b, 2) - 4 * a *c)) / 2 * a;
         if (firstRoot == secondRoot) 
             cout << "La unica raiz que tiene es: " << firstRoot << endl;
             return; }
@@ -35,8 +35,8 @@ class CRaices {
     void calcular() {
         if (pow(b, 2) - 4 * a * c < 0)  cout << "No tiene reices" << endl;
         else { 
-        cout << "La primera raiz es:" << (-b + sqrt(pow(n, 2) - 4 * a *c)) / 2 * a << endl;
-        cout << "La primera raiz es:" << (-b - sqrt(pow(n, 2) - 4 * a *c)) / 2 * a << endl; }
+        cout << "La primera raiz es:" << (-b + sqrt(pow(b, 2) - 4 * a *c)) / 2 * a << endl;
+        cout << "La segunda raiz es:" << (-b - sqrt(pow(b, 2) - 4 * a *c)) / 2 * a << endl; }
         }
 };
 
