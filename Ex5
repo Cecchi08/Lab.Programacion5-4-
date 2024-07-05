@@ -1,1 +1,55 @@
+#include <bits/stdc++.h>
 
+using namespace std;
+
+class CRaices {
+    private: 
+    int a;
+    int b;
+    int c;
+    public:
+    CRaices(int A, int B, int C) {
+        this-> a = A;
+        this-> b = B;
+        this-> c = C;
+    }
+    void obtenerRaices() {
+        cout << (-b + sqrt(pow(n, 2) - 4 * a *c)) / 2 * a << endl;
+        cout << (-b - sqrt(pow(n, 2) - 4 * a *c)) / 2 * a << endl;
+        return; }
+    
+    void obtenerRaiz() {
+        int firstRoot = (-b + sqrt(pow(n, 2) - 4 * a *c)) / 2 * a;
+        int secondRoot = (-b - sqrt(pow(n, 2) - 4 * a *c)) / 2 * a;
+        if (firstRoot == secondRoot) 
+            cout << "La unica raiz que tiene es: " << firstRoot << endl;
+            return; }
+    
+    int getDiscriminante() {
+        return pow(b, 2) - 4 * a * c; }
+    
+    bool tieneRaices() {
+        if (pow(b, 2) - 4 * a * c >= 0) return true;
+        else return false; }
+    
+    void calcular() {
+        if (pow(b, 2) - 4 * a * c < 0)  cout << "No tiene reices" << endl;
+        else { 
+        cout << "La primera raiz es:" << (-b + sqrt(pow(n, 2) - 4 * a *c)) / 2 * a << endl;
+        cout << "La primera raiz es:" << (-b - sqrt(pow(n, 2) - 4 * a *c)) / 2 * a << endl; }
+        }
+};
+
+int main(){
+    int a, b, c;
+    cout << "Ingrese los coeficientes a, b y c" << endl;
+    cin >> a >> b >> c;
+    CRaices raiz(a, b, c);
+    raiz.obtenerRaices();
+    raiz.obtenerRaiz();
+    raiz.getDiscriminante();
+    if (raiz.tieneRaices())  cout << "Tiene raices" << endl;
+    else cout << "No tiene raices" << endl;
+    raiz.calcular();
+    return 0;
+}
