@@ -1,0 +1,105 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+class Persona {
+    private:
+    string nombre;
+    int edad;
+    public:
+    Persona(string, int);
+    void mostrarPersona();
+};
+
+class Alumno : public Persona{
+    private:
+    
+    string codigoAlumno;
+    float notaFinal;
+    public:
+    
+    Alumno(string _nombre, int _edad, string _codigoAlumno, float _notaFinal);
+    void mostrarAlumno();
+};
+
+class Docente : public Persona{
+    private:
+    
+    string CUIL;
+    string titulo;
+    public:
+    
+    Docente(string _nombre, int _edad, string _CUIL, string _titulo);
+    void mostrarDocente();
+};
+
+    Persona::Persona(string _nombre, int _edad) {
+    nombre = _nombre;
+    edad = _edad;
+}
+
+    Alumno::Alumno (string _nombre, int _edad, string _codigoAlumno, float _notaFinal) :Persona(_nombre, _edad) {
+        codigoAlumno = _codigoAlumno;
+        notaFinal = _notaFinal;
+}
+
+    Docente::Docente (string _nombre, int _edad, string _CUIL, string _titulo) : Persona(_nombre, _edad){
+        CUIL = _CUIL;
+        titulo = _titulo;
+}
+
+void Persona::mostrarPersona() {
+    cout << "Nombre: " << nombre << endl;
+    cout << "Edad: " << edad << endl;
+    return;
+}
+
+void Alumno:: mostrarAlumno(){
+    mostrarPersona();
+    cout << "Codigo de Alumno: " << codigoAlumno << endl;
+    cout << "Nota final: " << notaFinal << endl;
+    return;
+}
+
+void Docente:: mostrarDocente(){
+    mostrarPersona();
+    cout << "CUIL: " << CUIL << endl;
+    cout << "Titulo: " << titulo << endl;
+    return;
+}
+
+int main(){
+    int edad, cantPersonas;
+    string profesion, nombre, CUIL, titulo, codigoAlumno;
+    float notaFinal;
+    cout << "Ingrese la cantidad de personas" << endl;
+    cin >> cantPersonas;
+    while (cantPersonas--){
+        cout << "Ingrese su profesion docente/alumno" << endl;
+        cin >> profesion;
+        if (profesion == "docente") {
+            cout << "Ingrese su nombre" << endl;
+            cin >> nombre;
+            cout << "Ingrese su edad" <<endl;
+            cin >> edad;
+            cout << "Ingrese CUIL" << endl;
+            cin >> CUIL;
+            cout << "Ingrese su titulo" << endl;
+            cin >> titulo;
+            Docente Docente1(nombre, edad, CUIL, titulo);
+            Docente1.mostrarDocente();
+        } else if (profesion == "alumno"){
+            cout << "Ingrese su nombre" << endl;
+            cin >> nombre;
+            cout << "Ingrese su edad" <<endl;
+            cin >> edad;
+            cout << "Ingrese codigo" << endl;
+            cin >> codigoAlumno;
+            cout << "Ingrese su nota final" << endl;
+            cin >> notaFinal;
+            Alumno Alumno1(nombre, edad, codigoAlumno, notaFinal);
+            Alumno1.mostrarAlumno();
+        }
+    }
+    return 0;
+}
