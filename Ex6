@@ -1,0 +1,88 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+class Empleado {
+    protected:
+    string nombre;
+    int edad;
+    int salario;
+    public:
+    Empleado(string, int, int);
+};
+
+Empleado::Empleado(string _nombre, int _edad, int _salario) {
+    nombre = _nombre;
+    edad = _edad;
+    salario = _salario;
+}
+
+class Comercial : public Empleado {
+    private:
+    double comision;
+    public:
+    Comercial(string _nombre, int _edad, int _salario, double _comision);
+    bool cobraPlus();
+};
+
+Comercial::Comercial(string _nombre, int _edad, int _salario, double _comision) : Empleado(_nombre, _edad, _salario) {
+    comision = _comision;
+}
+
+bool Comercial::cobraPlus() {
+    if (edad > 30 && salario >= 200) 
+        return true;
+    return false;
+}
+
+class Repartidor : public Empleado {
+    private: 
+    string zona;
+    public:
+    Repartidor(string _nombre, int _edad, int _salario, string _zona);
+    bool recibePlus();
+};
+
+Repartidor::Repartidor(string _nombre, int _edad, int _salario, string _zona) : Empleado(_nombre, _edad, _salario) {
+    zona = _zona;
+}
+
+bool Repartidor::recibePlus() {
+    if (edad > 25 && zona == "zona 3")
+        return true;
+    return false;
+}
+
+int main() {
+    const int plus = 30000;
+    string nombre, rol, zona;
+    int edad, salario, cant;
+    double comision;
+    cout << "Ingrese la cantidad de personas" << endl;
+    cin >> cant;
+    while (cant--) {
+        cout << "Ingrese su nombre, edad y salario" << endl;
+        cin >> nombre >> edad >> salario;
+        cout << "Ingrese su rol, es decir, comercial o repartidor" << endl;
+        cin >> rol;
+        if (rol == "comercial") {
+            cout << "Ingrese su comision" << endl;
+            cin >> comision;
+            Comercial trabajador(nombre, edad, salario, comision);
+            if (trabajador.cobraPlus()) 
+                cout << "Usted, recibe el plus de " << plus << " pesos" << endl;
+            else 
+                cout << "Usted, no recibe el plus de " << plus << " pesos" << endl;
+        } else if (rol == "repartidor") {
+            cout << "Ingrese la zona en la que reparte" << endl;
+            cin.ignore(); 
+            getline(cin, zona);
+            Repartidor trabajador(nombre, edad, salario, zona);
+            if (trabajador.recibePlus()) 
+                cout << "Usted, recibe el plus de " << plus << " pesos" << endl;
+            else 
+                cout << "Usted, no recibe el plus de " << plus << " pesos" << endl;
+        }
+    }
+    return 0;
+}
