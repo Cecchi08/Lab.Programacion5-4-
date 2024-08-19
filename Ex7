@@ -1,0 +1,89 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+vector<int> arr;
+
+class Producto {
+private:
+    string nombre;
+    int precio;
+    int productos;
+
+public:
+    Producto(string _nombre, int _precio, int _productos);
+    int calcularDias();
+};
+
+Producto::Producto(string _nombre, int _precio, int _productos) {
+    nombre = _nombre;
+    precio = _precio;
+    productos = _productos;
+}
+
+int Producto::calcularDias() {
+    return productos * precio;
+}
+
+class Perecedero : public Producto {
+private:
+    int dias;
+
+public:
+    Perecedero(string _nombre, int _precio, int _productos, int _dias);
+    double calcularPrecio();
+};
+
+Perecedero::Perecedero(string _nombre, int _precio, int _productos, int _dias)
+    : Producto(_nombre, _precio, _productos), dias(_dias) {
+}
+
+double Perecedero::calcularPrecio() {
+    calcularDias();
+    double price = calcularDias(); 
+    if (dias == 1) price /= 4;
+    else if (dias == 2) price /= 3;
+    else price /= 2;
+    return price;
+}
+
+class NoPerecedero : public Producto {
+public:
+    NoPerecedero(string _nombre, int _precio, int _productos);
+    void calcularDias();
+};
+
+NoPerecedero::NoPerecedero(string _nombre, int _precio, int _productos)
+    : Producto(_nombre, _precio, _productos) {
+}
+
+int main() {
+    string nombre, tipo;
+    int precio, productos;
+    arr = vector<int>(5); 
+    int m = 5;
+
+    while (m--) {
+        cout << "Ingrese el nombre del producto" << endl;
+        cin >> nombre;
+        cout << "Ingrese el precio del producto" << endl;
+        cin >> precio;
+        cout << "Ingrese cuantas veces se fabrico" << endl;
+        cin >> productos;
+        cout << "Ingrese el tipo del producto" << endl;
+        cin >> tipo;
+
+        if (tipo == "perecedero") {
+            int dias;
+            cout << "Ingrese los días a caducar" << endl;
+            cin >> dias;
+            Perecedero producto1(nombre, precio, productos, dias);
+            double precioFinal = producto1.calcularPrecio();
+            cout << "El precio final del producto perecedero es: " << precioFinal << endl;
+        } else if (tipo == "noperecedero") {
+            Producto producto1(nombre, precio, productos);
+            producto1.calcularDias();
+        }
+    }
+    return 0;
+}
