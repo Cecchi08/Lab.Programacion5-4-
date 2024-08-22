@@ -1,0 +1,76 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int m;
+vector<vector<almacen>> matriz;  
+
+class almacen {
+private:
+    string tipo;
+    string identificador;
+    int litros;
+    float precio;
+    string marca;
+
+public:
+    almacen(string _tipo, string _identificador, int _litros, float _precio, string _marca);
+    void mostrarProducto();
+};
+
+almacen::almacen(string _tipo, string _identificador, int _litros, float _precio, string _marca) {
+    tipo = _tipo;
+    identificador = _identificador;
+    litros = _litros;
+    precio = _precio;
+    marca = _marca;
+}
+
+void almacen::mostrarProducto() {
+    cout << "El identificador del producto es " << identificador 
+         << ", su tipo es " << tipo 
+         << ", su cantidad de litros es " << litros 
+         << ", su precio es " << precio 
+         << ", su marca es " << marca << endl;  
+}
+
+int main() {
+    int litros;
+    float precio, porcentaje;
+    string marca, tipo, identificador, origen, promocion;
+
+    cout << "Ingrese la cantidad de bebidas" << endl;
+    cin >> m;
+    matriz.resize(m, vector<almacen>(m));
+
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < m; j++) {
+            cout << "Ingrese el tipo" << endl;
+            cin >> tipo;
+            cout << "Ingrese el identificador" << endl;
+            cin >> identificador;
+            cout << "Ingrese la cantidad de litros" << endl;
+            cin >> litros;
+            cout << "Ingrese el precio" << endl;
+            cin >> precio;
+            cout << "Ingrese la marca" << endl;
+            cin >> marca;
+
+            if (marca == "agua mineral") {
+                cout << "Ingrese el origen del agua" << endl;
+                cin >> origen;
+            } else if (tipo == "bebida azucarada") {
+                cout << "Ingrese el porcentaje de azúcar" << endl;
+                cin >> porcentaje;
+                cout << "Ingrese si tiene promoción" << endl;
+                cin >> promocion;
+            }
+
+            almacen producto(tipo, identificador, litros, precio, marca);
+            matriz[i][j] = producto;  
+            producto.mostrarProducto();
+        }
+    }
+
+    return 0;
+}
