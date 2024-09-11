@@ -12,7 +12,7 @@ private:
 
 public:
     Producto(string _nombre, int _precio, int _productos);
-    int calcularDias();
+    virtual int calcularDias();
 };
 
 Producto::Producto(string _nombre, int _precio, int _productos) {
@@ -30,32 +30,27 @@ private:
     int dias;
 
 public:
-    Perecedero(string _nombre, int _precio, int _productos, int _dias);
-    double calcularPrecio();
+    Perecedero(string _nombre, int _precio, int _productos, int _dias) 
+        : Producto(_nombre, _precio, _productos), dias(_dias) {}
+
+    double calcularPrecio() {
+        double price = Producto::calcularDias();
+        if (dias == 1) price /= 4;
+        else if (dias == 2) price /= 3;
+        else price /= 2;
+        return price;
+    }
 };
-
-Perecedero::Perecedero(string _nombre, int _precio, int _productos, int _dias)
-    : Producto(_nombre, _precio, _productos), dias(_dias) {
-}
-
-double Perecedero::calcularPrecio() {
-    calcularDias();
-    double price = calcularDias(); 
-    if (dias == 1) price /= 4;
-    else if (dias == 2) price /= 3;
-    else price /= 2;
-    return price;
-}
 
 class NoPerecedero : public Producto {
 public:
-    NoPerecedero(string _nombre, int _precio, int _productos);
-    void calcularDias();
-};
+    NoPerecedero(string _nombre, int _precio, int _productos) 
+        : Producto(_nombre, _precio, _productos) {}
 
-NoPerecedero::NoPerecedero(string _nombre, int _precio, int _productos)
-    : Producto(_nombre, _precio, _productos) {
-}
+    int calcularDias() {
+        return Producto::calcularDias();
+    }
+};
 
 int main() {
     string nombre, tipo;
@@ -81,8 +76,8 @@ int main() {
             double precioFinal = producto1.calcularPrecio();
             cout << "El precio final del producto perecedero es: " << precioFinal << endl;
         } else if (tipo == "noperecedero") {
-            Producto producto1(nombre, precio, productos);
-            producto1.calcularDias();
+            NoPerecedero producto1(nombre, precio, productos);
+            cout << "El precio final del producto no perecedero es: " << producto1.calcularDias() << endl;
         }
     }
     return 0;
