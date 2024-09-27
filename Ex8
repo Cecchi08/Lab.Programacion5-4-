@@ -1,22 +1,127 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <string>
+#include <vector>
 
 using namespace std;
 
-int m;
-vector<vector<almacen>> matriz;  
-
-class almacen {
-private:
-    string tipo;
-    string identificador;
-    int litros;
-    float precio;
+class Bebida {
+protected:
     string marca;
+    double precio;
+    double litros;
 
 public:
-    almacen(string _tipo, string _identificador, int _litros, float _precio, string _marca);
-    void mostrarProducto();
+    Bebida(const string& marca, double precio, double litros): marca(marca), precio(precio), litros(litros) {}
+    string getMarca() {
+         return marca; 
+    }
+    double getPrecio() {
+        return precio;
+    }
+    double getLitros(){
+        return litros; 
+    }
+
+    virtual void mostrarInformacion() const {
+        cout << "Marca: " << marca << ", Precio: $" << precio << ", Litros: " << litros << endl;
+    }
+
 };
+
+class BebidaAzucarada : public Bebida {
+private:
+    double cantidadDeAzucar;
+    bool tienePromocion;
+
+public:
+    BebidaAzucarada(const string& marca, double precio, double litros, double azucar, bool promocion) : Bebida(marca, precio, litros), cantidadDeAzucar(azucar), tienePromocion(promocion) {}
+
+    double getCantidadDeAzucar(){
+    return cantidadDeAzucar;
+    }
+    bool getTienePromocion() const {
+        return tienePromocion; 
+     }
+
+    void mostrarInformacion() const override {
+    Bebida::mostrarInformacion();
+    cout << "Cantidad de Azucar: " << cantidadDeAzucar << "g, Promocion: ";
+
+    if (tienePromocion) {
+        cout << "Si" << endl;
+    } else {
+        cout << "No" << endl;
+    }
+}
+};
+
+class AguaMineral : public Bebida {
+private:
+    string origen;
+
+public:
+    AguaMineral(const string& marca, double precio, double litros, const string& origen): Bebida(marca, precio, litros), origen(origen) {}
+
+    string getOrigen(){
+        return origen; 
+    }
+
+    void mostrarInformacion() const override {
+        Bebida::mostrarInformacion();
+        cout << "Origen: " << origen << endl;
+    }
+};
+
+class Almacen {
+private:
+    vector<Bebida*> bebidas;
+
+public:
+
+    void agregarProducto(Bebida* bebida) {
+        bebidas.push_back(bebida); 
+     }
+
+    double calcularPrecioTotal() const {
+        double total = 0;
+        for (int i = 0; i < bebidas.size(); ++i) {
+            total += bebidas[i]->getPrecio();
+         }
+        return total;
+    }
+
+    double calcularPrecioPorMarca(string marca) const {
+        double total = 0;
+        for (int i = 0; i < bebidas.size(); ++i) {
+            if (bebidas[i]->getMarca() == marca) {
+                total += bebidas[i]->getPrecio();
+            }
+         }
+            return total;
+    }
+
+    void mostrarInformacion() const {
+        for (int i = 0; i < bebidas.size(); ++i) {
+            bebidas[i]->mostrarInformacion();
+            cout << "-------------------" << endl;
+        }
+    }
+};
+
+int main() {
+    Almacen almacen;
+    Bebida* bebida1 = new BebidaAzucarada("Seven Up", 1.5, 1.5, 35.0, true);
+    Bebida* bebida2 = new BebidaAzucarada("Crush", 1.3, 1.5, 30.0, false);
+    Bebida* agua1 = new AguaMineral("Evian", 2.0, 1.0, "Montaña de los Alpes");
+    almacen.agregarProducto(bebida1);
+    almacen.agregarProducto(bebida2);
+    almacen.agregarProducto(agua1);
+    cout << "Información de todas las bebidas en el almacén:" << endl;
+    almacen.mostrarInformacion();
+    cout << "Precio total de todas las bebidas: $" << almacen.calcularPrecioTotal() << endl;
+    cout << "Precio total de las bebidas de marca Coca-Cola: $" << almacen.calcularPrecioPorMarca("Coca-Cola") << endl;
+    return 0;
+}
 
 almacen::almacen(string _tipo, string _identificador, int _litros, float _precio, string _marca) {
     tipo = _tipo;
